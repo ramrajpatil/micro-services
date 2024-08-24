@@ -1,8 +1,8 @@
-package com.rpd.user.service.services;
+package com.rpd.user.services;
 
 import java.util.List;
 
-import com.rpd.user.service.entities.User;
+import com.rpd.user.entities.User;
 
 public interface IUserService {
 	

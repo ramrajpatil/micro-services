@@ -1,4 +1,4 @@
-package com.rpd.user.service.entities;
+package com.rpd.user.entities;
 
 import java.util.ArrayList;
 import java.util.List;

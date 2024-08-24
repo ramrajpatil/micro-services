@@ -1,4 +1,4 @@
-package com.rpd.user.service.exp;
+package com.rpd.user.exp;
 
 public class ResourceNotFoundException extends RuntimeException {
 

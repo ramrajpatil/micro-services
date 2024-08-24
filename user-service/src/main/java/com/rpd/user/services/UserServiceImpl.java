@@ -1,4 +1,4 @@
-package com.rpd.user.service.services;
+package com.rpd.user.services;
 
 import java.util.List;
 import java.util.UUID;
@@ -6,9 +6,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rpd.user.service.entities.User;
-import com.rpd.user.service.exp.ResourceNotFoundException;
-import com.rpd.user.service.repos.UserRepository;
+import com.rpd.user.entities.User;
+import com.rpd.user.exp.ResourceNotFoundException;
+import com.rpd.user.repos.UserRepository;
 
 import jakarta.transaction.Transactional;
 

@@ -1,11 +1,11 @@
-package com.rpd.user.service.exp;
+package com.rpd.user.exp;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.rpd.user.service.payload.ApiResponse;
+import com.rpd.user.payload.ApiResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

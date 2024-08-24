@@ -1,10 +1,10 @@
-package com.rpd.user.service.repos;
+package com.rpd.user.repos;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.rpd.user.service.entities.User;
+import com.rpd.user.entities.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 

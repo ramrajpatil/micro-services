@@ -1,4 +1,4 @@
-package com.rpd.user.service.controllers;
+package com.rpd.user.controllers;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rpd.user.service.entities.User;
-import com.rpd.user.service.payload.ApiResponse;
-import com.rpd.user.service.services.IUserService;
+import com.rpd.user.entities.User;
+import com.rpd.user.payload.ApiResponse;
+import com.rpd.user.services.IUserService;
 
 @RestController
 @RequestMapping("/users")
@@ -43,14 +43,12 @@ public class UserRestController {
 	}
 
 	// all users get
-
 	@GetMapping()
 	public ResponseEntity<List<User>> getAllUsers() {
 		List<User> allUsers = this.uService.getAllUsers();
 		return ResponseEntity.ok(allUsers);
 	}
-	
-	
+
 	// delete
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable String userId) {
@@ -58,5 +56,6 @@ public class UserRestController {
 		ApiResponse response = ApiResponse.builder().message(msg).success(true).build();
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
+
 	// update
 }

@@ -1,4 +1,4 @@
-package com.rpd.user.service.payload;
+package com.rpd.user.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
