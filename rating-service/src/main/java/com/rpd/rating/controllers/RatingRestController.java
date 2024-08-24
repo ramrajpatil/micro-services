@@ -34,23 +34,29 @@ public class RatingRestController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saveRating);
 	}
 	
+	// get single rating
 	@GetMapping("/{ratingId}")
 	public ResponseEntity<Rating> getSingleRating(@PathVariable String ratingId){
 		Rating rating = this.rService.getSingleRating(ratingId);
 		
 		return ResponseEntity.ok(rating);
 	}
+	
+	// get all ratings
 	@GetMapping
 	public ResponseEntity<List<Rating>> getAllRatings(){
 		List<Rating> ratings = this.rService.getAllRatings();
 		return ResponseEntity.ok(ratings);
 	}
+	
+	// get all ratings by user
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<Rating>> getRatingsByUser(@PathVariable String userId){
 		List<Rating> ratings = this.rService.getAllRatingsByUserId(userId);
 		return ResponseEntity.ok(ratings);
 	}
 	
+	// get all rating by hotel
 	@GetMapping("/hotel/{hotelId}")
 	public ResponseEntity<List<Rating>> getRatingsByHotel(@PathVariable String hotelId){
 		List<Rating> ratings = this.rService.getAllRatingsByHotelId(hotelId);
@@ -58,6 +64,7 @@ public class RatingRestController {
 		return ResponseEntity.ok(ratings);
 	}
 	
+	// delete ratings
 	@DeleteMapping("{ratingId}")
 	public ResponseEntity<ApiResponse> deleteRating(@PathVariable String ratingId){
 		
