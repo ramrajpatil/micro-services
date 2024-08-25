@@ -17,6 +17,7 @@ import com.rpd.user.entities.Rating;
 import com.rpd.user.entities.User;
 import com.rpd.user.exp.ResourceNotFoundException;
 import com.rpd.user.repos.UserRepository;
+import com.rpd.user.services.external.services.HotelService;
 
 import jakarta.transaction.Transactional;
 
@@ -29,6 +30,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private HotelService hotelService;
 
 	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -48,10 +52,11 @@ public class UserServiceImpl implements IUserService {
 		List<Rating> list = Arrays.stream(userRatings).map(rating -> {
 			// api call to hotel service to get hotel
 			// http://localhost:8082/hotels/691d17b2-8a1e-412f-8722-aaf18f79dcf1
-			ResponseEntity<Hotel> response = restTemplate
-					.getForEntity("http://HOTEL-SERVICE/hotels/" + rating.getHotelId(), Hotel.class);
-			Hotel hotel = response.getBody();
-			logger.info("Response status code: {} ",response.getStatusCode());
+//			ResponseEntity<Hotel> response = restTemplate
+//					.getForEntity("http://HOTEL-SERVICE/hotels/" + rating.getHotelId(), Hotel.class);
+//			logger.info("Response status code: {} ",response.getStatusCode());
+			
+			Hotel hotel = hotelService.getHotel(rating.getHotelId());
 
 			// Set the hotel to rating
 			rating.setHotel(hotel);
