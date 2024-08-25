@@ -2,12 +2,14 @@ package com.rpd.registry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
-public class ServiceRegistryApplication {
+@EnableEurekaServer
+public class ServiceRegistry1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceRegistryApplication.class, args);
+		SpringApplication.run(ServiceRegistry1Application.class, args);
 	}
 
 }
