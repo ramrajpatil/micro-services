@@ -16,3 +16,13 @@ spring:
 #      hibernate:
 #        dialect: org.hibernate.dialect.MySQLDialect
     open-in-view: false
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+  # By default true. no need to add further two
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
