@@ -2,6 +2,8 @@ package com.rpd.user.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rpd.user.entities.User;
 import com.rpd.user.payload.ApiResponse;
 import com.rpd.user.services.IUserService;
+import com.rpd.user.services.UserServiceImpl;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 
 @RestController
 @RequestMapping("/users")
@@ -26,6 +33,8 @@ public class UserRestController {
 	@Autowired
 	private IUserService uService;
 
+	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
 	// create
 	@PostMapping
 	public ResponseEntity<User> saveUser(@RequestBody User user) {
@@ -34,12 +43,31 @@ public class UserRestController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 	}
 
+	int retryCount=1;
 	// single user get
 	@GetMapping("/{userId}")
+//	@CircuitBreaker(name = "ratingHotelBreaker", fallbackMethod = "ratingHotelfallback")
+//	@Retry(name = "ratingHotelService",fallbackMethod = "ratingHotelFallback")
+	@RateLimiter(name = "userRateLimiter", fallbackMethod = "ratingHotelFallback")
 	public ResponseEntity<User> getSingleUser(@PathVariable String userId) {
 		User singleUser = this.uService.getSingleUser(userId);
 
+		logger.info("retry count: ",retryCount);
+		retryCount++;
+		
 		return ResponseEntity.status(HttpStatus.OK).body(singleUser);
+	}
+
+	// fallback method
+	public ResponseEntity<User> ratingHotelFallback(String userId, Exception ex) {
+//		logger.info("Fallback is executed because service is down.", ex.getMessage());
+
+		User user = User.builder()
+				.email("dummy@gmail.com")
+				.name("Dummy")
+				.about("This user is created dummy because some service is down.")
+				.userId("1234").build();
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	// all users get
