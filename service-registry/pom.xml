@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rpd.registry</groupId>
-	<artifactId>service-registry-1</artifactId>
+	<artifactId>service-registry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>service-registry-1</name>
+	<name>service-registry</name>
 	<description>This project is for the service registry</description>
 	<url/>
 	<licenses>
